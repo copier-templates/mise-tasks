@@ -1,0 +1,6 @@
+[tools]
+git-cliff = "2.14"
+
+[tasks."changelog:generate"]
+description = "Generate CHANGELOG.md for review"
+run = "git-cliff -o CHANGELOG.md"
