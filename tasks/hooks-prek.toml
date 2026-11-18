@@ -1,0 +1,10 @@
+[tools]
+prek = "0.5"
+
+["hooks:install"]
+description = "Install prek git hooks"
+run = "prek install --install-hooks --force"
+
+["hooks:run"]
+description = "Run all hooks on all files"
+run = "prek run --all-files"
