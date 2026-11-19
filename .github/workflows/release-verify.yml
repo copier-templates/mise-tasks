@@ -1,0 +1,33 @@
+name: Release verify
+
+# Read-only report: it cannot block a tag push, only flag a bad release afterwards.
+on:
+  push:
+    tags: ["*.*.*"]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Tag is on main and in CHANGELOG
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Check tag
+        env:
+          VERSION: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          git fetch --quiet origin main
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" origin/main; then
+            echo "::error::tag $VERSION is not reachable from origin/main"
+            exit 1
+          fi
+          if ! grep -q "^## \[$VERSION\]" CHANGELOG.md; then
+            echo "::error::CHANGELOG.md has no ## [$VERSION] heading"
+            exit 1
+          fi
