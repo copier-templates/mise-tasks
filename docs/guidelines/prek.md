@@ -29,3 +29,5 @@ Run the manifest as a consumer would; prek clones the repo, so stage the manifes
 ```sh
 git add .pre-commit-hooks.yaml && prek try-repo . --all-files
 ```
+
+CI runs the same command in the `manifest` job of [ci.yml](../../.github/workflows/ci.yml).

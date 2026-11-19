@@ -75,7 +75,9 @@ Notes:
 
 ## Contributing
 
-Follow the guidelines in [docs/guidelines/](docs/guidelines/): [mise](docs/guidelines/mise.md) for tasks, [prek](docs/guidelines/prek.md) for hooks, and [shell](docs/guidelines/shell.md) for scripts.
+Follow the guidelines in [docs/guidelines/](docs/guidelines/): [mise](docs/guidelines/mise.md) for tasks, [prek](docs/guidelines/prek.md) for hooks, [shell](docs/guidelines/shell.md) for scripts, and [renovate](docs/guidelines/renovate.md) for dependency updates.
+
+Pull requests run [CI](.github/workflows/ci.yml), which executes the prek hooks and the manifest check. PR titles must be Conventional Commits ([pr-title](.github/workflows/pr-title.yml)). Dependency updates come from Renovate.
 
 ## Releasing
 

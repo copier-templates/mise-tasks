@@ -65,4 +65,4 @@ Scripts under `tasks/` that mise runs as file tasks (for example `tasks/release/
 
 ## Validation
 
-Every change passes `mise tasks validate` and `prek run --all-files`.
+Every change passes `mise tasks validate` and `prek run --all-files`; CI runs both. Renovate's mise manager updates `[tools]` and `mise.lock`, so do not edit those versions by hand; see the [renovate guidelines](renovate.md).
