@@ -1,0 +1,14 @@
+# Ty Tasks (Python type checking via uv)
+["ty:check"]
+description = "Type-check Python with ty"
+tags = [
+  "lint",
+]
+run = "uv run --frozen ty check"
+
+["ty:fix"]
+description = "Type-check Python with ty and autofix"
+tags = [
+  "fix",
+]
+run = "uv run --frozen ty check --fix"

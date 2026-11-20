@@ -1,0 +1,28 @@
+# Ruff Tasks (Python lint and format via uv)
+["ruff:lint"]
+description = "Lint Python with Ruff (check-only)"
+tags = [
+  "lint",
+]
+run = "uv run --frozen ruff check"
+
+["ruff:fix"]
+description = "Lint Python with Ruff and autofix"
+tags = [
+  "fix",
+]
+run = "uv run --frozen ruff check --fix"
+
+["ruff:fmt"]
+description = "Format Python code in place with Ruff"
+tags = [
+  "fmt",
+]
+run = "uv run --frozen ruff format"
+
+["ruff:fmt:check"]
+description = "Check Python formatting with Ruff without changing files"
+tags = [
+  "lint",
+]
+run = "uv run --frozen ruff format --check"
