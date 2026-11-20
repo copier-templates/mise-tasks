@@ -30,13 +30,13 @@ tasks/<category>/<tool>.tasks.toml   # e.g. tasks/toml/taplo.tasks.toml, tasks/p
 ```
 
 - One file per tool, grouped by category folder (`core`, `toml`, `release`, `py`, ...).
-- Always use the `.tasks.toml` suffix. A bare `<tool>.toml` collides with config files tools auto-discover: mise ignores `mise.toml`, prek parses `prek.toml` as a hook config, ruff and uv read `ruff.toml` and `uv.toml`.
+- Always use the `.tasks.toml` suffix. A bare `<tool>.toml` collides with config files that tools auto-discover: mise ignores `mise.toml`, prek parses `prek.toml` as a hook config, and ruff and uv read `ruff.toml` and `uv.toml`.
 - Folders organise files only; they do not prefix task names.
 
 ## Task definitions
 
 - Name tasks `<tool>:<verb>`, with further `:` segments for sub-verbs (`taplo:lint`, `mise:lock:check`).
-- Every task has a `description` and at least one tag from: `lint`, `fmt`, `fix`, `test`, `setup`, `release`, `maintenance`. Tags let `mise run --tag lint` select checks across tools.
+- Every task has a `description` and at least one of these tags: `lint`, `fmt`, `fix`, `test`, `setup`, `release`, `maintenance`. Tags let `mise run --tag lint` select checks across tools.
 - Tasks that accept files take them as trailing arguments (`mise run taplo:lint a.toml b.toml` appends them to `run`), so prek hooks can pass filenames.
 - Tasks define workflows only. Project configuration (`prek.toml`, `.taplo.toml`, `cliff.toml`, linter configs) belongs to the consumer.
 
@@ -54,7 +54,7 @@ Globs work only for local paths. An unresolvable entry makes every mise command 
 
 ## File tasks
 
-Scripts under `tasks/` that mise runs as file tasks (for example `tasks/release/cut.sh`). Shell rules: [shell guidelines](shell.md).
+Scripts under `tasks/` that mise runs as file tasks (for example `tasks/release/cut.sh`) follow the [shell guidelines](shell.md).
 
 - Place scripts directly in `tasks/<category>/` and name each after its action: `tasks/release/cut.sh` is `release:cut`. The path sets the task name, so do not set `#MISE alias`.
 - Put task metadata in `#MISE` lines right after the shebang: `description`, `tags` (see [task definitions](#task-definitions)), and `interactive=true` when the script prompts.

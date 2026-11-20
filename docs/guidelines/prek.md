@@ -5,8 +5,8 @@ Rules for the published hook manifest `.pre-commit-hooks.yaml` and this repo's o
 ## Manifest
 
 - `.pre-commit-hooks.yaml` sits at the repo root; prek has no other manifest location or format.
-- A hook wraps a shared mise task by default: `language: system`, `entry: mise run <task>`. The task stays the single source of command and tool version (see [mise guidelines](mise.md)).
-- Another prek `language` (`python`, `rust`, `script`, ...) is allowed when it brings real value, such as an isolated environment. The hook's `description` then states why.
+- A hook wraps a shared mise task by default: `language: system`, `entry: mise run <task>`. The task remains the single source for the command and the tool version (see [mise guidelines](mise.md)).
+- Another prek `language` (`python`, `rust`, `script`, ...) is allowed when the task alone is not enough, such as an isolated environment. The hook's `description` then states why.
 - Hook `id` equals its task name with `:` replaced by `-` (`taplo:lint` → `taplo-lint`).
 - Every hook has a `description` naming the task it runs.
 - Whole-repo checks set `pass_filenames: false`; file-based hooks narrow input with `types` or `files`.
