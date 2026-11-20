@@ -8,11 +8,11 @@
 
 # Shared Dev Tooling
 
-Shared [mise](https://mise.jdx.dev/) tasks and [prek](https://prek.j178.dev) hooks, reusable across projects. mise installs every tool; prek hooks are thin wrappers that call the mise tasks (`mise run <task>`), so hooks, CI, and manual runs behave the same. Tasks and hooks are released together under one semver tag.
+[mise](https://mise.jdx.dev/) tasks and [prek](https://prek.j178.dev) hooks shared across projects. mise installs every tool; prek hooks are thin wrappers that call the mise tasks (`mise run <task>`), so hooks, CI, and manual runs behave the same. Tasks and hooks are released together under one semver tag.
 
 ## Scope
 
-This repo ships workflows only: task definitions and hook definitions. It never ships project configuration (`prek.toml`, `.taplo.toml`, `cliff.toml`, linter configs) or tool versions. Each consumer owns those. This repo's own config files are a reference.
+This repo ships workflows only: task and hook definitions. It never ships project configuration (`prek.toml`, `.taplo.toml`, `cliff.toml`, linter configs) or tool versions. Each consumer owns those. This repo's own config files are a reference.
 
 ## Layout
 
@@ -68,10 +68,40 @@ Notes:
 
 - Include granularity: `//tasks` (everything), `//tasks/<category>` (one category), or `//tasks/<category>/<tool>.tasks.toml` (one tool; the `.toml` extension is required). Globs only work for local paths.
 - Shared tasks do not declare tool versions. If a task fails with `command not found`, add the tool with `mise use <tool>@<version>`. Upgrade all tools at once with `mise run mise:bump` (within ranges) or `mise upgrade --bump` (raises ranges).
-- Without `?ref=` the default branch is used from cache. Run `mise run mise:cache:clear` to refetch it.
+- Without `?ref=` the default branch is used from cache. Run `mise run mise:cache:clear` to refetch the branch.
 - To override a shared task, list a local directory after the remote entry.
 - Hooks can be tuned per consumer (`args`, `files`, `exclude`, `priority`, `stages`) next to their `id` without copying the definition.
 - Bump the hook `rev` with `prek update` (respects `[update] cooldown_days`) and move the mise `ref` to the same tag.
+
+## Task tags
+
+Every task has at least one tag: `lint`, `fmt`, `fix`, `test`, `setup`, `release`, `maintenance`.
+
+List all tags (sorted, unique):
+
+```sh
+mise run mise:tags
+```
+
+List tasks with a tag:
+
+```sh
+mise tasks ls --tag lint
+```
+
+Run every task with a tag (e.g. all checks, all formatters):
+
+```sh
+mise run --tag lint
+mise run --tag fmt
+mise run --tag test
+```
+
+Repeat `--tag` to accept any of several tags; dependencies run regardless of their tags:
+
+```sh
+mise run --tag lint --tag fmt
+```
 
 ## Contributing
 
