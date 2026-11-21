@@ -11,6 +11,7 @@ Shared mise tasks (`tasks/`) and prek hooks (`.pre-commit-hooks.yaml`) consumed 
 | Editing any shell script | [shell guidelines](docs/guidelines/shell.md). A file task also follows the [file tasks section](docs/guidelines/mise.md#file-tasks). |
 | Writing interactive shell output | use gum, per [gum guidelines](docs/guidelines/gum.md) |
 | Working with Bun, JS/TS, or editing `tasks/bun/*` | [bun guidelines](docs/guidelines/bun.md) |
+| Working with Python or editing `tasks/py/*` | [py guidelines](docs/guidelines/py.md) |
 
 ## Example commands
 
